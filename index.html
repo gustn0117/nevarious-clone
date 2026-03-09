@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeVarious</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Figtree:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', 'Figtree', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fff;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.65);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.hero-logo {
+  width: 468px;
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 10px;
+}
+.hero-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 39px;
+  font-weight: 900;
+  margin-top: 8px;
+}
+.hero-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ===== QUOTE SECTION ===== */
+.quote-section {
+  padding: 70px 40px 0;
+  text-align: center;
+  background: #fff;
+}
+.quote-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 24px;
+}
+.quote-icon img {
+  width: 100%; height: 100%;
+}
+.quote-text {
+  font-size: 21px;
+  line-height: 1.8;
+  color: #333;
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: 600;
+}
+.quote-divider {
+  width: 500px;
+  max-width: 80%;
+  height: 1px;
+  background: #ddd;
+  margin: 50px auto 0;
+}
+
+/* ===== OUR MISSION (이런 분께 필요합니다) ===== */
+.mission-section {
+  padding: 70px 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.mission-image {
+  flex-shrink: 0;
+  width: 340px;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+.mission-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.mission-image-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+}
+.mission-content {
+  flex: 1;
+}
+.mission-content h2 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 39px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: #0c0c0b;
+}
+.mission-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.mission-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #333;
+}
+.mission-list li .check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background: #0c0c0b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.mission-list li .check svg {
+  width: 12px; height: 12px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ===== 제공 서비스 SECTION ===== */
+.services-section {
+  padding: 60px 40px 80px;
+  background: #fff;
+}
+.services-section .section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.services-section .section-header h2 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: #0c0c0b;
+  margin-bottom: 12px;
+}
+.services-section .section-header p {
+  font-size: 18px;
+  color: rgb(64, 66, 69);
+}
+.services-notice {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  font-size: 18px;
+  color: rgb(64, 66, 69);
+  text-align: center;
+  line-height: 1.7;
+}
+.services-notice .small {
+  font-size: 13px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.service-card {
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  height: 320px;
+}
+.service-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.service-card-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.service-card h3 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.service-card p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+}
+
+/* ===== 우리가 지향하는 방식 ===== */
+.values-section {
+  padding: 80px 40px;
+  background: #f8f8f8;
+  text-align: center;
+}
+.values-section h2 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 43px;
+  font-weight: 800;
+  color: #0c0c0b;
+  margin-bottom: 16px;
+}
+.values-section > p {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 60px;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.value-card {
+  text-align: left;
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 28px;
+  min-height: 250px;
+}
+.value-card .icon-box {
+  width: 44px; height: 44px;
+  margin-bottom: 20px;
+}
+.value-card .icon-box img {
+  width: 100%; height: 100%;
+}
+.value-card h3 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0c0c0b;
+  margin-bottom: 14px;
+}
+.value-card p {
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* ===== 성공사례 ===== */
+.cases-section {
+  padding: 80px 40px;
+  background: #fff;
+  text-align: center;
+}
+.cases-section h2 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 43px;
+  font-weight: 800;
+  color: #0c0c0b;
+  margin-bottom: 12px;
+}
+.cases-section > p {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 50px;
+}
+.cases-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 41px;
+  align-items: flex-end;
+}
+.case-img {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.case-img img {
+  display: block;
+  height: auto;
+}
+.case-img:nth-child(1) img { width: 176px; }
+.case-img:nth-child(2) img { width: 203px; }
+.case-img:nth-child(3) img { width: 292px; }
+
+/* ===== 차별화 포인트 ===== */
+.differentiators-section {
+  padding: 80px 40px;
+  background: #fff;
+  text-align: center;
+}
+.differentiators-section h2 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 43px;
+  font-weight: 800;
+  color: #0c0c0b;
+  margin-bottom: 12px;
+}
+.differentiators-section > p {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 50px;
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.diff-card {
+  text-align: left;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 28px 24px;
+  background: #fff;
+}
+.diff-card .diff-icon {
+  width: 32px; height: 32px;
+  margin-bottom: 18px;
+}
+.diff-card h3 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0c0c0b;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.diff-card p {
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #777;
+  line-height: 1.7;
+}
+
+/* ===== PRICING ===== */
+.pricing-section {
+  padding: 0 40px 80px;
+  background: #fff;
+}
+.pricing-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.pricing-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 36px 32px;
+}
+.pricing-card h3 {
+  font-family: 'Figtree', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #0c0c0b;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.pricing-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pricing-card ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #555;
+}
+.pricing-card ul li svg {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER QUOTE ===== */
+.footer-quote {
+  padding: 80px 40px;
+  text-align: center;
+  background: #fff;
+}
+.footer-quote .quote-icon {
+  margin-bottom: 20px;
+}
+.footer-quote p {
+  font-size: 21px;
+  color: #333;
+  line-height: 1.8;
+  font-weight: 600;
+}
+.footer-quote .sub {
+  font-size: 21px;
+  color: #888;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+/* ===== FLOATING BUTTONS ===== */
+.floating-btns {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 999;
+}
+.floating-btn {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: #0c0c0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+.floating-btn:hover {
+  transform: scale(1.05);
+}
+.floating-btn svg {
+  width: 22px; height: 22px;
+  fill: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .diff-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .mission-section { flex-direction: column; padding: 50px 20px; gap: 40px; }
+  .mission-image { width: 100%; height: 300px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .cases-gallery { flex-direction: column; align-items: center; }
+  .hero-brand { font-size: 36px; }
+  .hero-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO SECTION -->
+<header class="hero">
+  <div class="hero-bg">
+    <img src="images/DBkH3bMA4h0RUWPdUnjlhSFaxE.png" alt="Hero background">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="images/czl2PfG80Yf9399qsvQ7X2SzU.png" alt="NeVarious Logo" class="hero-logo">
+    <div class="hero-title">사실과 문서로 대응합니다</div>
+    <div class="hero-subtitle">개인 권리 보호를 위한 분쟁 대응 구조 설계 자문 컨설팅</div>
+  </div>
+</header>
+
+<!-- QUOTE SECTION -->
+<section class="quote-section">
+  <div class="quote-icon"><img src="images/T1xjWixlL6nC4GLmno02pIO8H0.png" alt="quote"></div>
+  <p class="quote-text">
+    저희는 분쟁 상황에서 무엇을 주장할지가 아니라, 무엇을 어떻게 정리해 제출해야 하는지를 설계합니다.<br>
+    개인 권리 보호를 위한 분쟁 대응 구조 설계 자문을 제공합니다.
+  </p>
+  <div class="quote-divider"></div>
+</section>
+
+<!-- 이런 분께 필요합니다 -->
+<section class="mission-section">
+  <div class="mission-image">
+    <img src="images/Ux1ua4KakSfUhzX1ls9JUmYRI.png" alt="Our experts">
+    <div class="mission-image-overlay"></div>
+  </div>
+  <div class="mission-content">
+    <h2>이런 분께 필요합니다</h2>
+    <ul class="mission-list">
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span>회사·기관과의 분쟁에서 어디서부터 어떻게 대응해야 할지 막막한 분</span>
+      </li>
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span>이미 갈등이 발생했지만 불필요하게 키우고 싶지 않은 분</span>
+      </li>
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span>말이나 감정이 아니라 문서와 절차로 정리된 대응이 필요한 분</span>
+      </li>
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span>노무사·변호사 상담 전, 사안 구조부터 정리하고 싶은 분</span>
+      </li>
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span>개인 또는 소상공인으로서 절차상 불리해질 가능성을 사전에 차단하고 싶은 분</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 제공 서비스 -->
+<section class="services-section">
+  <div class="section-header">
+    <h2>제공 서비스</h2>
+    <p>사안을 대신 판단하거나 결과를 약속하지 않습니다.</p>
+  </div>
+  <p class="services-notice">
+    의뢰인이 직접 작성할 수 있도록 사실관계 정리 방식과 자료 배열 구조에 대한 방향을 안내합니다.<br>
+    <span class="small">※ 본 서비스는 법률자문·법률대리·문서 작성·수정·대리 제출 등을 포함하지 않으며, 모든 문서는 의뢰인이 직접 작성·제출합니다.</span>
+  </p>
+  <div class="services-grid">
+    <div class="service-card">
+      <img src="images/8mwsct7MJICkcq602dS3F69lE.png" alt="사실관계 정리 및 구조화">
+      <div class="service-card-overlay">
+        <h3>사실관계 정리 및 구조화</h3>
+        <p>사건 흐름·시점·관계 정리, 핵심 쟁점과 주변 요소 분리, 불리한 프레임 사전 차단 구조 설계</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="images/32CY9R4qU0MSKuSAx3bOlX2Zuc.png" alt="문서 구성 자문">
+      <div class="service-card-overlay">
+        <h3>문서 구성 자문</h3>
+        <p>진정·소명·의견서 등 제출 문서 구조 설계, 불필요한 감정·주관 요소 제거, 기관 판단 기준에 맞춘 문장 흐름 자문<br>(작성·수정·대리 제출 등 포함하지 않음)</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="images/WtE38bKta9blXnh0bORbYCGi8.png" alt="절차 대응 흐름 설계">
+      <div class="service-card-overlay">
+        <h3>절차 대응 흐름 설계</h3>
+        <p>절차 단계에서 고려 가능한 선택지와 일반적인 진행 흐름을 정리 향후 절차 예상 및 준비 범위 안내 중복·과잉 대응 리스크 관리</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 우리가 지향하는 방식 -->
+<section class="values-section">
+  <h2>우리가 지향하는 방식</h2>
+  <p>분쟁은 이기기 위해 키우는 것이 아니라, 지지 않도록 관리해야 하는 과정이라고 생각합니다.</p>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="icon-box">
+        <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon">
+      </div>
+      <h3>주장보다 구조</h3>
+      <p>무엇이 옳은지를 말하기보다, 기관이 판단할 수 있도록 사안을 구조화하는 데 집중합니다.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon-box">
+        <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon">
+      </div>
+      <h3>감정보다 사실</h3>
+      <p>분노·억울함·해명보다, 확인 가능한 사실과 문서로 상황을 정리합니다.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon-box">
+        <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon">
+      </div>
+      <h3>즉흥 대응보다 절차 설계</h3>
+      <p>당장의 반응이 아닌, 현재 단계와 이후 절차까지 고려한 대응 흐름을 설계합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 성공사례 -->
+<section class="cases-section">
+  <h2>성공사례</h2>
+  <p>대응 전략 설계만으로 공식 인정까지 이끌어낸 사례</p>
+  <div class="cases-gallery">
+    <div class="case-img">
+      <img src="images/81QUeygpsjydBgiZlryBnJ00lM.png" alt="성공사례 1">
+    </div>
+    <div class="case-img">
+      <img src="images/tHEu2pPXke72d3fhFTIeaZHxFXg.png" alt="성공사례 2">
+    </div>
+    <div class="case-img">
+      <img src="images/cL9K5et3eBpe7Su4CFLjVxqeUvI.jpeg" alt="성공사례 3">
+    </div>
+  </div>
+</section>
+
+<!-- 차별화 포인트 -->
+<section class="differentiators-section">
+  <h2>차별화 포인트</h2>
+  <p>의견이 아닌, 기관 검토 기준에 맞춘 문서 구조를 중심으로 접근합니다.</p>
+  <div class="diff-grid">
+    <div class="diff-card">
+      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
+      <h3>막연한 조언이 아닌<br>구체적 문서 구조 중심</h3>
+      <p>방향성만 제시하는 상담이 아니라, 실제로 제출 가능한 문서의 구조와 흐름을 기준으로 자문합니다.</p>
+    </div>
+    <div class="diff-card">
+      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
+      <h3>감정 호소가 아닌<br>객관적 사실 정리</h3>
+      <p>억울함을 강조하기보다, 확인 가능한 사실과 근거 중심으로 사안을 정리합니다.</p>
+    </div>
+    <div class="diff-card">
+      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
+      <h3>단편 대응이 아닌<br>절차 전체 흐름 설계</h3>
+      <p>한 번의 대응으로 끝내는 방식이 아니라, 현재 단계부터 이후 절차까지 고려한 대응 구조를 설계합니다.</p>
+    </div>
+    <div class="diff-card">
+      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
+      <h3>결과 약속이 아닌<br>리스크 관리와 현실적 방향 제시</h3>
+      <p>결과를 단정하지 않고, 불리해질 가능성을 줄이기 위한 현실적인 선택지를 제시합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="pricing-grid">
+    <!-- 풀패키지 -->
+    <div class="pricing-card">
+      <h3>사안 구조 정리 컨설팅 풀패키지</h3>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>사안 전체 구조 정리</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>사실 타임라인 정렬</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>자료 배열 기준 안내</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>추가 질문 정리 가이드</span>
+        </li>
+      </ul>
+    </div>
+    <!-- 핵심 정리 패키지 -->
+    <div class="pricing-card">
+      <h3>사안 핵심 정리 패키지</h3>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>사안 전체 구조 정리</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>쟁점 흐름 시각화</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>자료 배열 기준 안내</span>
+        </li>
+      </ul>
+    </div>
+    <!-- 개별 컨설팅 -->
+    <div class="pricing-card">
+      <h3>개별(일반) 컨설팅</h3>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>사안 정리 전화 문의</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>사안 전체 구조 정리</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>사실 타임라인 정렬</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>자료 배열 기준 안내</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>추가 질문 정리 가이드</span>
+        </li>
+      </ul>
+    </div>
+    <!-- 프리미엄 -->
+    <div class="pricing-card">
+      <h3>프리미엄 단독 컨설팅</h3>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>개인 기록 정리</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>장기 사안 기록 관리</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>제출 순서 가이드</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER QUOTE -->
+<section class="footer-quote">
+  <div class="quote-icon"><img src="images/T1xjWixlL6nC4GLmno02pIO8H0.png" alt="quote"></div>
+  <p>분쟁이 커지기 전에, 사안의 구조부터 정확히 잡습니다.</p>
+  <p class="sub">개인 권리 보호를 위한 분쟁 대응 구조 정리 컨설팅</p>
+</section>
+
+<!-- FLOATING BUTTONS -->
+<div class="floating-btns">
+  <div class="floating-btn">
+    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+  </div>
+  <div class="floating-btn">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+  </div>
+</div>
+
+</body>
+</html>
