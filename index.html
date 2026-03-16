@@ -12,978 +12,655 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Inter', 'Figtree', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #fff;
-  color: #000;
+  background: #0a0a0a;
+  color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  height: 100vh;
 }
 
-/* ===== HERO SECTION ===== */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  min-height: 560px;
-  max-height: 800px;
-  overflow: hidden;
+/* ===== NOISE TEXTURE OVERLAY ===== */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ===== VIGNETTE EFFECT ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
+}
+
+/* ===== FLOATING PARTICLES ===== */
+.floating-dot {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+.floating-dot:nth-child(1) {
+  top: 18%; left: 12%;
+  animation: floatDot1 18s ease-in-out infinite;
+}
+.floating-dot:nth-child(2) {
+  top: 72%; left: 85%;
+  width: 2px; height: 2px;
+  animation: floatDot2 22s ease-in-out infinite;
+  opacity: 0.7;
+}
+.floating-dot:nth-child(3) {
+  top: 35%; left: 78%;
+  width: 4px; height: 4px;
+  background: rgba(255,255,255,0.06);
+  animation: floatDot3 25s ease-in-out infinite;
+}
+.floating-dot:nth-child(4) {
+  top: 82%; left: 22%;
+  width: 2px; height: 2px;
+  animation: floatDot4 20s ease-in-out infinite;
+  opacity: 0.5;
+}
+.floating-dot:nth-child(5) {
+  top: 55%; left: 45%;
+  width: 3px; height: 3px;
+  background: rgba(255,255,255,0.08);
+  animation: floatDot5 28s ease-in-out infinite;
+}
+.floating-dot:nth-child(6) {
+  top: 10%; left: 60%;
+  width: 2px; height: 2px;
+  animation: floatDot6 24s ease-in-out infinite;
+  opacity: 0.6;
+}
+@keyframes floatDot1 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(30px, -20px); }
+  50% { transform: translate(-15px, 35px); }
+  75% { transform: translate(20px, 15px); }
+}
+@keyframes floatDot2 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-25px, 18px); }
+  50% { transform: translate(20px, -30px); }
+  75% { transform: translate(-10px, -12px); }
+}
+@keyframes floatDot3 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-35px, -25px); }
+  66% { transform: translate(15px, 30px); }
+}
+@keyframes floatDot4 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(18px, -28px); }
+  50% { transform: translate(-22px, -10px); }
+  75% { transform: translate(12px, 22px); }
+}
+@keyframes floatDot5 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(25px, 20px); }
+  66% { transform: translate(-20px, -15px); }
+}
+@keyframes floatDot6 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-15px, 25px); }
+  50% { transform: translate(28px, 10px); }
+  75% { transform: translate(-8px, -20px); }
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo img {
+  height: 26px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+.nav-menu-btn {
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.hero-bg {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 0;
-}
-.hero-bg img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.hero-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.65);
-  z-index: 1;
-}
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding: 0 24px;
-}
-.hero-logo {
-  width: 468px;
-  max-width: 85%;
-  height: auto;
-  margin-bottom: 10px;
-}
-.hero-title {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 39px;
-  font-weight: 900;
-  margin-top: 8px;
-  letter-spacing: -0.5px;
-}
-.hero-subtitle {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.7);
-  letter-spacing: 0.5px;
-  margin-top: 4px;
-}
-.hero-cta {
-  display: flex;
-  gap: 12px;
-  margin-top: 28px;
-}
-.hero-cta a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  border-radius: 50px;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
   transition: all 0.3s;
 }
-.hero-cta .btn-primary {
-  background: #fff;
-  color: #0c0c0b;
+.nav-menu-btn:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
 }
-.hero-cta .btn-primary:hover {
-  background: #f0f0f0;
-  transform: translateY(-2px);
-}
-.hero-cta .btn-secondary {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.3);
-  backdrop-filter: blur(4px);
-}
-.hero-cta .btn-secondary:hover {
-  background: rgba(255,255,255,0.25);
-  transform: translateY(-2px);
-}
-.hero-cta a svg {
+.nav-menu-btn svg {
   width: 18px; height: 18px;
-  flex-shrink: 0;
+  stroke: rgba(255,255,255,0.7);
+  stroke-width: 2;
+  fill: none;
 }
 
-/* ===== QUOTE SECTION ===== */
-.quote-section {
-  padding: 80px 24px 0;
-  text-align: center;
-  background: #fff;
-}
-.quote-icon {
-  width: 32px;
-  height: 32px;
-  margin: 0 auto 24px;
-}
-.quote-icon img {
-  width: 100%; height: 100%;
-}
-.quote-text {
-  font-size: 20px;
-  line-height: 1.9;
-  color: #333;
-  max-width: 680px;
-  margin: 0 auto;
-  font-weight: 600;
-  word-break: keep-all;
-}
-.quote-divider {
-  width: 500px;
-  max-width: 80%;
-  height: 1px;
-  background: #e5e5e5;
-  margin: 60px auto 0;
-}
-
-/* ===== OUR MISSION ===== */
-.mission-section {
-  padding: 80px 24px 90px;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 60px;
-}
-.mission-image {
-  flex-shrink: 0;
-  width: 380px;
-  height: 440px;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-}
-.mission-image img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.mission-image-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
-}
-.mission-content {
-  flex: 1;
-}
-.mission-content h2 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 38px;
-  font-weight: 800;
-  margin-bottom: 32px;
-  color: #0c0c0b;
-  letter-spacing: -0.5px;
-}
-.mission-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.mission-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  font-family: 'Figtree', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.6;
-  color: #333;
-  word-break: keep-all;
-}
-.mission-list li .check {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  background: #0c0c0b;
-  border-radius: 50%;
+/* ===== FULLSCREEN MENU ===== */
+.menu-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.97);
+  backdrop-filter: blur(40px);
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.mission-list li .check svg {
-  width: 12px; height: 12px;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
-
-/* ===== SERVICES ===== */
-.services-section {
-  padding: 80px 24px 90px;
-  background: #fafafa;
+.menu-overlay.active .menu-list li {
+  opacity: 1;
+  transform: translateY(0);
 }
-.services-section .section-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.services-section .section-header h2 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 44px;
-  font-weight: 800;
-  color: #0c0c0b;
-  margin-bottom: 14px;
-  letter-spacing: -0.5px;
-}
-.services-section .section-header p {
-  font-size: 17px;
-  color: rgb(100, 100, 105);
-}
-.services-notice {
-  max-width: 860px;
-  margin: 0 auto 44px;
-  font-size: 17px;
-  color: rgb(100, 100, 105);
-  text-align: center;
-  line-height: 1.8;
-  word-break: keep-all;
-}
-.services-notice .small {
-  font-size: 13px;
-  color: #999;
-}
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.service-card {
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  height: 360px;
-  cursor: default;
-  transition: transform 0.3s;
-}
-.service-card:hover {
-  transform: translateY(-4px);
-}
-.service-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s;
-}
-.service-card:hover img {
-  transform: scale(1.05);
-}
-.service-card-overlay {
+.menu-close {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 28px;
-  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
-  height: 55%;
+  top: 28px; right: 48px;
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.menu-close:hover {
+  background: rgba(255,255,255,0.12);
+}
+.menu-close svg {
+  width: 18px; height: 18px;
+  stroke: rgba(255,255,255,0.7);
+  stroke-width: 2;
+  fill: none;
+}
+.menu-list {
+  list-style: none;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  gap: 12px;
 }
-.service-card h3 {
+.menu-list li {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-list li:nth-child(1) { transition-delay: 0.1s; }
+.menu-list li:nth-child(2) { transition-delay: 0.2s; }
+.menu-list li a {
+  font-family: 'Figtree', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.2);
+  text-decoration: none;
+  transition: all 0.4s;
+  display: inline-block;
+  letter-spacing: -1.5px;
+}
+.menu-list li a:hover {
+  color: #fff;
+  letter-spacing: -1px;
+}
+.menu-list li .menu-sub {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.15);
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+
+/* ===== BACKGROUND ===== */
+.bg-image {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+  background: url('images/hero-glass.jpg') center/cover no-repeat;
+  opacity: 0.15;
+  filter: grayscale(100%);
+}
+.bg-gradient {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+.bg-gradient::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.02) 0%, transparent 50%);
+  animation: bgShift 20s ease-in-out infinite alternate;
+}
+@keyframes bgShift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-5%, -3%); }
+}
+.bg-grid {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+/* ===== MAIN HERO ===== */
+.main-hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.main-hero-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0 24px;
+}
+
+/* ===== STAGGERED ENTRANCE ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUpSubtle {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.main-hero-content .main-logo {
+  animation: fadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+.main-hero-content .main-divider {
+  animation: fadeUpSubtle 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.35s both;
+}
+.main-hero-content .main-tagline {
+  animation: fadeUpSubtle 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.55s both;
+}
+.main-hero-content .main-services {
+  animation: fadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+}
+
+.main-logo {
+  width: 360px;
+  max-width: 75%;
+  height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+.main-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  margin: 32px 0;
+}
+.main-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.main-services {
+  display: flex;
+  gap: 16px;
+  margin-top: 56px;
+}
+
+/* ===== SERVICE CARDS WITH SHIMMER ===== */
+.main-service-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.03);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  min-width: 280px;
+}
+.main-service-link::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+/* Shimmer sweep effect */
+.main-service-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.04) 30%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 70%,
+    transparent 100%
+  );
+  transition: none;
+  pointer-events: none;
+}
+.main-service-link:hover::after {
+  animation: shimmerSweep 1.2s ease-in-out;
+}
+@keyframes shimmerSweep {
+  0% { left: -100%; }
+  100% { left: 150%; }
+}
+.main-service-link:hover::before {
+  opacity: 1;
+}
+.main-service-link:hover {
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.03);
+}
+.service-info {
+  text-align: left;
+  flex: 1;
+}
+.service-info .service-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  transition: color 0.4s;
+}
+.main-service-link:hover .service-label {
+  color: rgba(255,255,255,0.5);
+}
+.service-info h3 {
   font-family: 'Figtree', sans-serif;
   font-size: 19px;
   font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
+  letter-spacing: -0.3px;
 }
-.service-card p {
-  font-size: 14px;
-  color: rgba(255,255,255,0.75);
-  line-height: 1.7;
-  word-break: keep-all;
+.service-info p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
 }
-
-/* ===== VALUES ===== */
-.values-section {
-  padding: 90px 24px;
-  background: #fff;
-  text-align: center;
-}
-.values-section h2 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 42px;
-  font-weight: 800;
-  color: #0c0c0b;
-  margin-bottom: 16px;
-  letter-spacing: -0.5px;
-}
-.values-section > p {
-  font-size: 15px;
-  color: #999;
-  margin-bottom: 56px;
-  word-break: keep-all;
-}
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.value-card {
-  text-align: left;
-  background: #f8f8f8;
-  border-radius: 20px;
-  padding: 36px 28px;
-  min-height: 240px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.value-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-}
-.value-card .icon-box {
-  width: 44px; height: 44px;
-  margin-bottom: 20px;
-}
-.value-card .icon-box img {
-  width: 100%; height: 100%;
-}
-.value-card h3 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #0c0c0b;
-  margin-bottom: 14px;
-}
-.value-card p {
-  font-family: 'Figtree', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #777;
-  line-height: 1.8;
-  word-break: keep-all;
-}
-
-/* ===== CASES ===== */
-.cases-section {
-  padding: 90px 24px;
-  background: #fafafa;
-  text-align: center;
-}
-.cases-section h2 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 42px;
-  font-weight: 800;
-  color: #0c0c0b;
-  margin-bottom: 14px;
-  letter-spacing: -0.5px;
-}
-.cases-section > p {
-  font-size: 15px;
-  color: #999;
-  margin-bottom: 50px;
-}
-.cases-gallery {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  align-items: flex-end;
-}
-.case-img {
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  transition: transform 0.3s;
-}
-.case-img:hover {
-  transform: translateY(-4px);
-}
-.case-img img {
-  display: block;
-  height: auto;
-}
-.case-img:nth-child(1) img { width: 176px; }
-.case-img:nth-child(2) img { width: 203px; }
-.case-img:nth-child(3) img { width: 292px; }
-
-/* ===== DIFFERENTIATORS ===== */
-.differentiators-section {
-  padding: 90px 24px;
-  background: #fff;
-  text-align: center;
-}
-.differentiators-section h2 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 42px;
-  font-weight: 800;
-  color: #0c0c0b;
-  margin-bottom: 14px;
-  letter-spacing: -0.5px;
-}
-.differentiators-section > p {
-  font-size: 15px;
-  color: #999;
-  margin-bottom: 50px;
-  word-break: keep-all;
-}
-.diff-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.diff-card {
-  text-align: left;
-  border: 1px solid #eee;
-  border-radius: 20px;
-  padding: 32px 24px;
-  background: #fff;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.diff-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-}
-.diff-card .diff-icon {
-  width: 32px; height: 32px;
-  margin-bottom: 20px;
-}
-.diff-card h3 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #0c0c0b;
-  margin-bottom: 14px;
-  line-height: 1.5;
-  word-break: keep-all;
-}
-.diff-card p {
-  font-family: 'Figtree', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #888;
-  line-height: 1.8;
-  word-break: keep-all;
-}
-
-/* ===== PRICING ===== */
-.pricing-section {
-  padding: 90px 24px;
-  background: #fafafa;
-}
-.pricing-section-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-.pricing-section-header h2 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 42px;
-  font-weight: 800;
-  color: #0c0c0b;
-  margin-bottom: 14px;
-  letter-spacing: -0.5px;
-}
-.pricing-section-header p {
-  font-size: 15px;
-  color: #999;
-}
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-.pricing-card {
-  border: 1px solid #eee;
-  border-radius: 20px;
-  padding: 36px 32px;
-  background: #fff;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.pricing-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-}
-.pricing-card h3 {
-  font-family: 'Figtree', sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-  color: #0c0c0b;
-  text-align: center;
-  margin-bottom: 28px;
-  word-break: keep-all;
-}
-.pricing-card ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.pricing-card ul li {
+.main-service-link .arrow {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  color: #555;
-}
-.pricing-card ul li svg {
-  width: 18px; height: 18px;
+  justify-content: center;
   flex-shrink: 0;
+  transition: all 0.4s;
+}
+.main-service-link:hover .arrow {
+  background: #fff;
+  border-color: #fff;
+}
+.main-service-link:hover .arrow svg {
+  stroke: #0a0a0a;
+}
+.main-service-link .arrow svg {
+  width: 16px; height: 16px;
+  stroke: rgba(255,255,255,0.4);
+  stroke-width: 2;
+  fill: none;
+  transition: all 0.4s;
 }
 
-/* ===== FOOTER QUOTE ===== */
-.footer-quote {
-  padding: 90px 24px;
-  text-align: center;
-  background: #0c0c0b;
-}
-.footer-quote .quote-icon {
-  margin-bottom: 20px;
-  opacity: 0.6;
-}
-.footer-quote p {
-  font-size: 22px;
-  color: #fff;
-  line-height: 1.8;
-  font-weight: 600;
-  word-break: keep-all;
-}
-.footer-quote .sub {
-  font-size: 18px;
-  color: rgba(255,255,255,0.5);
-  font-weight: 400;
-  margin-top: 8px;
-}
-
-/* ===== FLOATING BUTTONS ===== */
-.floating-btns {
+/* ===== SCROLL INDICATOR ===== */
+.scroll-indicator {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  z-index: 999;
-}
-.floating-btn {
-  width: 52px; height: 52px;
-  border-radius: 16px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
+  gap: 10px;
+  animation: fadeUpSubtle 0.8s 1.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.scroll-indicator span {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6), transparent);
+  animation: scrollDrop 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes scrollDrop {
+  0% { top: -50%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 120%; opacity: 0; }
+}
+
+/* ===== BOTTOM ===== */
+.bottom-info {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  text-align: center;
+  z-index: 10;
+  padding: 28px;
+  background: linear-gradient(to top, rgba(10,10,10,0.8), transparent);
+}
+.bottom-info p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.5px;
+}
+.bottom-info a {
+  color: rgba(255,255,255,0.35);
   text-decoration: none;
+  transition: color 0.3s;
 }
-.floating-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
-}
-.floating-btn.kakao {
-  background: #FEE500;
-}
-.floating-btn.phone {
-  background: #0c0c0b;
-}
-.floating-btn svg {
-  width: 24px; height: 24px;
+.bottom-info a:hover { color: rgba(255,255,255,0.7); }
+.bottom-info .dot {
+  display: inline-block;
+  width: 3px; height: 3px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  vertical-align: middle;
+  margin: 0 12px;
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
-  .hero { max-height: 700px; }
-  .hero-title { font-size: 32px; }
-  .hero-subtitle { font-size: 18px; }
-
-  .mission-section { gap: 40px; }
-  .mission-image { width: 320px; height: 380px; }
-  .mission-content h2 { font-size: 32px; }
-  .mission-list li { font-size: 16px; }
-
-  .services-section .section-header h2,
-  .values-section h2,
-  .cases-section h2,
-  .differentiators-section h2,
-  .pricing-section-header h2 { font-size: 36px; }
-
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .values-grid { grid-template-columns: repeat(2, 1fr); }
-  .diff-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 768px) {
-  .hero {
-    height: 100svh;
-    min-height: 480px;
-    max-height: none;
-  }
-  .hero-logo { width: 280px; }
-  .hero-title { font-size: 26px; }
-  .hero-subtitle { font-size: 15px; }
-  .hero-cta { flex-direction: column; width: 100%; max-width: 280px; }
-  .hero-cta a { justify-content: center; padding: 14px 24px; }
+  .nav { padding: 20px 20px; }
+  .nav-logo img { height: 22px; }
+  .nav-menu-btn { width: 42px; height: 42px; border-radius: 12px; }
+  .menu-close { top: 20px; right: 20px; width: 42px; height: 42px; }
+  .menu-list li a { font-size: 36px; }
+  .menu-list li .menu-sub { font-size: 12px; }
 
-  .quote-section { padding: 60px 20px 0; }
-  .quote-text { font-size: 17px; line-height: 1.8; }
-  .quote-divider { margin-top: 48px; }
-
-  .mission-section {
+  .main-logo { width: 240px; }
+  .main-tagline { font-size: 11px; letter-spacing: 3px; }
+  .main-services {
     flex-direction: column;
-    padding: 60px 20px;
-    gap: 32px;
+    gap: 12px;
+    width: 100%;
+    max-width: 340px;
+    margin-top: 40px;
   }
-  .mission-image { width: 100%; height: 280px; }
-  .mission-content h2 { font-size: 28px; margin-bottom: 24px; }
-  .mission-list li { font-size: 15px; }
-
-  .services-section { padding: 60px 20px 70px; }
-  .services-section .section-header h2 { font-size: 30px; }
-  .services-notice { font-size: 15px; }
-  .services-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-  .service-card { height: 300px; }
-
-  .values-section { padding: 60px 20px; }
-  .values-section h2 { font-size: 30px; }
-  .values-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-  .value-card { min-height: auto; }
-
-  .cases-section { padding: 60px 20px; }
-  .cases-section h2 { font-size: 30px; }
-  .cases-gallery {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  .main-service-link {
+    padding: 20px 24px;
+    border-radius: 16px;
+    min-width: 0;
+    gap: 16px;
   }
-  .case-img:nth-child(1) img,
-  .case-img:nth-child(2) img,
-  .case-img:nth-child(3) img {
-    width: 260px;
-  }
+  .service-info h3 { font-size: 17px; }
+  .service-info p { font-size: 12px; }
+  .main-service-link .arrow { width: 36px; height: 36px; }
 
-  .differentiators-section { padding: 60px 20px; }
-  .differentiators-section h2 { font-size: 30px; }
-  .diff-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .bottom-info { padding: 20px; }
 
-  .pricing-section { padding: 60px 20px; }
-  .pricing-section-header h2 { font-size: 30px; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .pricing-card h3 { font-size: 22px; }
-
-  .footer-quote { padding: 60px 20px; }
-  .footer-quote p { font-size: 19px; }
-  .footer-quote .sub { font-size: 16px; }
-
-  .floating-btns { bottom: 16px; right: 16px; }
-  .floating-btn { width: 48px; height: 48px; border-radius: 14px; }
-  .floating-btn svg { width: 22px; height: 22px; }
+  .floating-dot:nth-child(3),
+  .floating-dot:nth-child(5) { display: none; }
 }
 
 @media (max-width: 480px) {
-  .hero-logo { width: 220px; }
-  .hero-title { font-size: 22px; }
-  .hero-subtitle { font-size: 14px; }
-
-  .services-section .section-header h2,
-  .values-section h2,
-  .cases-section h2,
-  .differentiators-section h2,
-  .pricing-section-header h2 { font-size: 26px; }
-
-  .mission-content h2 { font-size: 24px; }
-  .mission-image { height: 240px; }
+  .main-logo { width: 180px; }
+  .main-tagline { font-size: 10px; }
+  .main-divider { margin: 24px 0; }
 }
 </style>
 </head>
 <body>
 
-<!-- HERO SECTION -->
-<header class="hero">
-  <div class="hero-bg">
-    <img src="images/DBkH3bMA4h0RUWPdUnjlhSFaxE.png" alt="Hero background">
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <img src="images/czl2PfG80Yf9399qsvQ7X2SzU.png" alt="NeVarious Logo" class="hero-logo">
-    <div class="hero-title">사실과 문서로 대응합니다</div>
-    <div class="hero-subtitle">개인 권리 보호를 위한 분쟁 대응 구조 설계 자문 컨설팅</div>
-    <div class="hero-cta">
-      <a href="https://pf.kakao.com/_evzgn" target="_blank" rel="noopener" class="btn-primary">
-        <svg viewBox="0 0 24 24" fill="#0c0c0b"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67-.15.56-.96 3.6-.99 3.83 0 0-.02.17.09.24.11.06.24.01.24.01.32-.04 3.7-2.44 4.28-2.86.55.08 1.13.12 1.72.12 5.52 0 10-3.58 10-7.94C22 6.58 17.52 3 12 3z"/></svg>
-        카카오톡 상담
-      </a>
-      <a href="tel:070-4047-8491" class="btn-secondary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        전화 상담
-      </a>
-    </div>
-  </div>
-</header>
+<div class="floating-dot"></div>
+<div class="floating-dot"></div>
+<div class="floating-dot"></div>
+<div class="floating-dot"></div>
+<div class="floating-dot"></div>
+<div class="floating-dot"></div>
 
-<!-- QUOTE SECTION -->
-<section class="quote-section">
-  <div class="quote-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="#0c0c0b"><path d="M6 18h4l-2 8h4l2-8V8H6v10zm12 0h4l-2 8h4l2-8V8H18v10z"/></svg></div>
-  <p class="quote-text">
-    저희는 분쟁 상황에서 무엇을 주장할지가 아니라, 무엇을 어떻게 정리해 제출해야 하는지를 설계합니다.<br>
-    개인 권리 보호를 위한 분쟁 대응 구조 설계 자문을 제공합니다.
-  </p>
-  <div class="quote-divider"></div>
-</section>
+<div class="bg-image"></div>
+<div class="bg-gradient"></div>
+<div class="bg-grid"></div>
 
-<!-- 이런 분께 필요합니다 -->
-<section class="mission-section">
-  <div class="mission-image">
-    <img src="images/Ux1ua4KakSfUhzX1ls9JUmYRI.png" alt="Our experts">
-    <div class="mission-image-overlay"></div>
-  </div>
-  <div class="mission-content">
-    <h2>이런 분께 필요합니다</h2>
-    <ul class="mission-list">
-      <li>
-        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <span>회사·기관과의 분쟁에서 어디서부터 어떻게 대응해야 할지 막막한 분</span>
-      </li>
-      <li>
-        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <span>이미 갈등이 발생했지만 불필요하게 키우고 싶지 않은 분</span>
-      </li>
-      <li>
-        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <span>말이나 감정이 아니라 문서와 절차로 정리된 대응이 필요한 분</span>
-      </li>
-      <li>
-        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <span>노무사·변호사 상담 전, 사안 구조부터 정리하고 싶은 분</span>
-      </li>
-      <li>
-        <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <span>개인 또는 소상공인으로서 절차상 불리해질 가능성을 사전에 차단하고 싶은 분</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- 제공 서비스 -->
-<section class="services-section">
-  <div class="section-header">
-    <h2>제공 서비스</h2>
-    <p>사안을 대신 판단하거나 결과를 약속하지 않습니다.</p>
-  </div>
-  <p class="services-notice">
-    의뢰인이 직접 작성할 수 있도록 사실관계 정리 방식과 자료 배열 구조에 대한 방향을 안내합니다.<br>
-    <span class="small">※ 본 서비스는 법률자문·법률대리·문서 작성·수정·대리 제출 등을 포함하지 않으며, 모든 문서는 의뢰인이 직접 작성·제출합니다.</span>
-  </p>
-  <div class="services-grid">
-    <div class="service-card">
-      <img src="images/8mwsct7MJICkcq602dS3F69lE.png" alt="사실관계 정리 및 구조화">
-      <div class="service-card-overlay">
-        <h3>사실관계 정리 및 구조화</h3>
-        <p>사건 흐름·시점·관계 정리, 핵심 쟁점과 주변 요소 분리, 불리한 프레임 사전 차단 구조 설계</p>
-      </div>
-    </div>
-    <div class="service-card">
-      <img src="images/32CY9R4qU0MSKuSAx3bOlX2Zuc.png" alt="문서 구성 자문">
-      <div class="service-card-overlay">
-        <h3>문서 구성 자문</h3>
-        <p>진정·소명·의견서 등 제출 문서 구조 설계, 불필요한 감정·주관 요소 제거, 기관 판단 기준에 맞춘 문장 흐름 자문<br>(작성·수정·대리 제출 등 포함하지 않음)</p>
-      </div>
-    </div>
-    <div class="service-card">
-      <img src="images/WtE38bKta9blXnh0bORbYCGi8.png" alt="절차 대응 흐름 설계">
-      <div class="service-card-overlay">
-        <h3>절차 대응 흐름 설계</h3>
-        <p>절차 단계에서 고려 가능한 선택지와 일반적인 진행 흐름을 정리 향후 절차 예상 및 준비 범위 안내 중복·과잉 대응 리스크 관리</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 우리가 지향하는 방식 -->
-<section class="values-section">
-  <h2>우리가 지향하는 방식</h2>
-  <p>분쟁은 이기기 위해 키우는 것이 아니라, 지지 않도록 관리해야 하는 과정이라고 생각합니다.</p>
-  <div class="values-grid">
-    <div class="value-card">
-      <div class="icon-box">
-        <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon">
-      </div>
-      <h3>주장보다 구조</h3>
-      <p>무엇이 옳은지를 말하기보다, 기관이 판단할 수 있도록 사안을 구조화하는 데 집중합니다.</p>
-    </div>
-    <div class="value-card">
-      <div class="icon-box">
-        <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon">
-      </div>
-      <h3>감정보다 사실</h3>
-      <p>분노·억울함·해명보다, 확인 가능한 사실과 문서로 상황을 정리합니다.</p>
-    </div>
-    <div class="value-card">
-      <div class="icon-box">
-        <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon">
-      </div>
-      <h3>즉흥 대응보다 절차 설계</h3>
-      <p>당장의 반응이 아닌, 현재 단계와 이후 절차까지 고려한 대응 흐름을 설계합니다.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 성공사례 -->
-<section class="cases-section">
-  <h2>성공사례</h2>
-  <p>대응 전략 설계만으로 공식 인정까지 이끌어낸 사례</p>
-  <div class="cases-gallery">
-    <div class="case-img">
-      <img src="images/81QUeygpsjydBgiZlryBnJ00lM.png" alt="성공사례 1">
-    </div>
-    <div class="case-img">
-      <img src="images/tHEu2pPXke72d3fhFTIeaZHxFXg.png" alt="성공사례 2">
-    </div>
-    <div class="case-img">
-      <img src="images/cL9K5et3eBpe7Su4CFLjVxqeUvI.jpeg" alt="성공사례 3">
-    </div>
-  </div>
-</section>
-
-<!-- 차별화 포인트 -->
-<section class="differentiators-section">
-  <h2>차별화 포인트</h2>
-  <p>의견이 아닌, 기관 검토 기준에 맞춘 문서 구조를 중심으로 접근합니다.</p>
-  <div class="diff-grid">
-    <div class="diff-card">
-      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
-      <h3>막연한 조언이 아닌<br>구체적 문서 구조 중심</h3>
-      <p>방향성만 제시하는 상담이 아니라, 실제로 제출 가능한 문서의 구조와 흐름을 기준으로 자문합니다.</p>
-    </div>
-    <div class="diff-card">
-      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
-      <h3>감정 호소가 아닌<br>객관적 사실 정리</h3>
-      <p>억울함을 강조하기보다, 확인 가능한 사실과 근거 중심으로 사안을 정리합니다.</p>
-    </div>
-    <div class="diff-card">
-      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
-      <h3>단편 대응이 아닌<br>절차 전체 흐름 설계</h3>
-      <p>한 번의 대응으로 끝내는 방식이 아니라, 현재 단계부터 이후 절차까지 고려한 대응 구조를 설계합니다.</p>
-    </div>
-    <div class="diff-card">
-      <img src="images/XUj7eLNmqVXXC4wGMtquG3CT8U.svg" alt="Icon" class="diff-icon">
-      <h3>결과 약속이 아닌<br>리스크 관리와 현실적 방향 제시</h3>
-      <p>결과를 단정하지 않고, 불리해질 가능성을 줄이기 위한 현실적인 선택지를 제시합니다.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing-section">
-  <div class="pricing-section-header">
-    <h2>컨설팅 패키지</h2>
-    <p>사안의 복잡도와 필요에 따라 선택하세요</p>
-  </div>
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <h3>사안 구조 정리 컨설팅<br>풀패키지</h3>
-      <ul>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>사안 전체 구조 정리</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>사실 타임라인 정렬</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>자료 배열 기준 안내</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>추가 질문 정리 가이드</span>
-        </li>
-      </ul>
-    </div>
-    <div class="pricing-card">
-      <h3>사안 핵심 정리<br>패키지</h3>
-      <ul>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>사안 전체 구조 정리</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>쟁점 흐름 시각화</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>자료 배열 기준 안내</span>
-        </li>
-      </ul>
-    </div>
-    <div class="pricing-card">
-      <h3>개별(일반)<br>컨설팅</h3>
-      <ul>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>사안 정리 전화 문의</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>사안 전체 구조 정리</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>사실 타임라인 정렬</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>자료 배열 기준 안내</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>추가 질문 정리 가이드</span>
-        </li>
-      </ul>
-    </div>
-    <div class="pricing-card">
-      <h3>프리미엄 단독<br>컨설팅</h3>
-      <ul>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>개인 기록 정리</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>장기 사안 기록 관리</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0c0c0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>제출 순서 가이드</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER QUOTE -->
-<section class="footer-quote">
-  <div class="quote-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="rgba(255,255,255,0.4)"><path d="M6 18h4l-2 8h4l2-8V8H6v10zm12 0h4l-2 8h4l2-8V8H18v10z"/></svg></div>
-  <p>분쟁이 커지기 전에, 사안의 구조부터 정확히 잡습니다.</p>
-  <p class="sub">개인 권리 보호를 위한 분쟁 대응 구조 정리 컨설팅</p>
-</section>
-
-<!-- FLOATING BUTTONS -->
-<div class="floating-btns">
-  <a href="https://pf.kakao.com/_evzgn" target="_blank" rel="noopener" class="floating-btn kakao" aria-label="카카오톡 상담">
-    <svg viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67-.15.56-.96 3.6-.99 3.83 0 0-.02.17.09.24.11.06.24.01.24.01.32-.04 3.7-2.44 4.28-2.86.55.08 1.13.12 1.72.12 5.52 0 10-3.58 10-7.94C22 6.58 17.52 3 12 3z"/></svg>
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="images/czl2PfG80Yf9399qsvQ7X2SzU.png" alt="NeVarious">
   </a>
-  <a href="tel:070-4047-8491" class="floating-btn phone" aria-label="전화 상담">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-  </a>
+  <button class="nav-menu-btn" onclick="document.querySelector('.menu-overlay').classList.add('active')" aria-label="메뉴">
+    <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+  </button>
+</nav>
+
+<!-- FULLSCREEN MENU -->
+<div class="menu-overlay">
+  <button class="menu-close" onclick="document.querySelector('.menu-overlay').classList.remove('active')" aria-label="닫기">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <ul class="menu-list">
+    <li>
+      <a href="labor.html">
+        행정·노동 컨설팅
+        <span class="menu-sub">분쟁 대응 구조 설계 자문</span>
+      </a>
+    </li>
+    <li>
+      <a href="retail.html">
+        리테일 컨설팅
+        <span class="menu-sub">유통 구조 분석 및 손익 설계</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- MAIN HERO -->
+<section class="main-hero">
+  <div class="main-hero-content">
+    <img src="images/czl2PfG80Yf9399qsvQ7X2SzU.png" alt="NeVarious" class="main-logo">
+    <div class="main-divider"></div>
+    <div class="main-tagline">Consulting Group</div>
+    <div class="main-services">
+      <a href="labor.html" class="main-service-link">
+        <div class="service-info">
+          <div class="service-label">Labor</div>
+          <h3>행정·노동 컨설팅</h3>
+          <p>분쟁 대응 구조 설계 자문</p>
+        </div>
+        <div class="arrow">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </a>
+      <a href="retail.html" class="main-service-link">
+        <div class="service-info">
+          <div class="service-label">Retail</div>
+          <h3>리테일 컨설팅</h3>
+          <p>유통 구조 분석 및 손익 설계</p>
+        </div>
+        <div class="arrow">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLL INDICATOR -->
+<div class="scroll-indicator">
+  <span>Scroll</span>
+  <div class="scroll-line"></div>
+</div>
+
+<!-- BOTTOM -->
+<div class="bottom-info">
+  <p>
+    <a href="https://pf.kakao.com/_evzgn" target="_blank" rel="noopener">카카오톡 상담</a>
+    <span class="dot"></span>
+    <a href="tel:070-4047-8491">070-4047-8491</a>
+  </p>
 </div>
 
 </body>
