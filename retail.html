@@ -216,6 +216,31 @@ body {
 .package-card p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.8; word-break: keep-all; }
 .package-counter-reset { counter-reset: pkg; }
 
+/* CLASS 101 */
+.class101-section { padding: 110px 24px; background: linear-gradient(135deg, #f7f5f0 0%, #ece8df 100%); position: relative; overflow: hidden; }
+.class101-section::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(10,10,10,0.04) 0%, transparent 70%); pointer-events: none; }
+.class101-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; position: relative; }
+.class101-left .section-tag { color: #8a8478; }
+.class101-left .section-tag::after { background: #c9c3b5; }
+.class101-title { font-family: 'Figtree', sans-serif; font-size: 40px; font-weight: 800; color: #0a0a0a; margin-bottom: 20px; letter-spacing: -0.5px; line-height: 1.25; word-break: keep-all; }
+.class101-title .accent { color: #8a7a52; }
+.class101-desc { font-size: 16px; color: #5a5a5a; line-height: 1.9; margin-bottom: 28px; word-break: keep-all; }
+.class101-highlights { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+.class101-highlights li { font-size: 15px; color: #3a3a3a; padding-left: 24px; position: relative; line-height: 1.7; word-break: keep-all; list-style: none; }
+.class101-highlights li::before { content: ''; position: absolute; left: 0; top: 10px; width: 14px; height: 2px; background: #0a0a0a; }
+.class101-cta { display: inline-flex; align-items: center; gap: 10px; padding: 17px 34px; background: #0a0a0a; color: #fff; border-radius: 16px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+.class101-cta:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.25); }
+.class101-cta svg { width: 18px; height: 18px; }
+.class101-card { background: #fff; border-radius: 24px; padding: 40px 36px; box-shadow: 0 24px 70px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+.class101-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, #0a0a0a, #8a7a52); }
+.class101-card-badge { display: inline-block; padding: 6px 12px; background: #f2efe7; color: #8a7a52; font-size: 11px; font-weight: 700; letter-spacing: 2px; border-radius: 6px; margin-bottom: 18px; }
+.class101-card h3 { font-family: 'Figtree', sans-serif; font-size: 24px; font-weight: 800; color: #0a0a0a; margin-bottom: 10px; letter-spacing: -0.3px; line-height: 1.35; }
+.class101-card .sub { font-size: 14px; color: #888; margin-bottom: 28px; line-height: 1.7; }
+.class101-meta { display: flex; flex-direction: column; gap: 14px; padding-top: 22px; border-top: 1px solid #eee; }
+.class101-meta-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+.class101-meta-row .label { color: #999; }
+.class101-meta-row .value { color: #0a0a0a; font-weight: 600; }
+
 /* FLOATING */
 .floating-btns { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 999; }
 .floating-btn { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.12); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration: none; }
@@ -268,6 +293,12 @@ body {
   .faq-section { padding: 80px 20px; }
   .package-section { padding: 80px 20px; }
   .package-grid { grid-template-columns: 1fr; }
+  .class101-section { padding: 80px 20px; }
+  .class101-inner { grid-template-columns: 1fr; gap: 40px; }
+  .class101-title { font-size: 28px; }
+  .class101-card { padding: 32px 24px; }
+  .class101-card h3 { font-size: 20px; }
+  .class101-cta { width: 100%; max-width: 280px; justify-content: center; }
   .floating-btns { bottom: 16px; right: 16px; }
   .floating-btn { width: 48px; height: 48px; border-radius: 14px; }
   .floating-btn svg { width: 22px; height: 22px; }
@@ -559,6 +590,36 @@ body {
       <div class="package-card">
         <h3>리테일 운영 체크리스트</h3>
         <p>매장 운영 점검, 리테일 관리 체크리스트, 기타 체크 문서 작성 등</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Class 101 강의 -->
+<section class="class101-section">
+  <div class="class101-inner reveal">
+    <div class="class101-left">
+      <div class="section-tag">Online Class</div>
+      <h2 class="class101-title">매출을 <span class="accent">숫자가 아닌 구조</span>로<br>바라보는 법</h2>
+      <p class="class101-desc">17개 강의로 정리한 리테일 현장의 운영 기준. 매출이 만들어지는 구조와 안정적으로 운영되는 매장의 공통 패턴을 배웁니다.</p>
+      <ul class="class101-highlights">
+        <li>매장을 운영하거나 관리하고 있는 리테일 종사자</li>
+        <li>매출이 만들어지는 구조를 이해하고 싶은 분</li>
+        <li>매장 운영을 체계적으로 바라보고 싶은 분</li>
+      </ul>
+      <a href="https://class101.net/ko/products/6986af6aeb6e502686c37453#curriculum" target="_blank" rel="noopener" class="class101-cta">
+        CLASS101에서 수강하기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="class101-card">
+      <span class="class101-card-badge">CLASS101</span>
+      <h3>유통 실무의 정석</h3>
+      <p class="sub">매출 흐름을 구조 관점에서 해석하는 리테일 실무 강의</p>
+      <div class="class101-meta">
+        <div class="class101-meta-row"><span class="label">구성</span><span class="value">총 17개 강의</span></div>
+        <div class="class101-meta-row"><span class="label">대상</span><span class="value">리테일·패션·유통 실무자</span></div>
+        <div class="class101-meta-row"><span class="label">방식</span><span class="value">온라인 VOD + 수업자료</span></div>
       </div>
     </div>
   </div>
