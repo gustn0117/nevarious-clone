@@ -659,8 +659,13 @@ body {
   display: flex;
   justify-content: center;
   gap: 32px;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 60px;
+}
+.case-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .case-img {
   border-radius: 16px;
@@ -675,6 +680,13 @@ body {
   display: block;
   height: 420px;
   width: auto;
+}
+.case-caption {
+  margin-top: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0c0c0b;
+  text-align: center;
 }
 
 /* ===== DIFFERENTIATORS ===== */
@@ -1261,14 +1273,23 @@ body {
   <p>대응 전략 설계만으로 공식 인정까지 이끌어낸 사례</p>
   </div>
   <div class="cases-gallery reveal">
-    <div class="case-img">
-      <img src="images/81QUeygpsjydBgiZlryBnJ00lM.png" alt="성공사례 1">
+    <div class="case-item">
+      <div class="case-img">
+        <img src="images/81QUeygpsjydBgiZlryBnJ00lM.png" alt="성공사례 1">
+      </div>
+      <p class="case-caption">의뢰인 후기</p>
     </div>
-    <div class="case-img">
-      <img src="images/cL9K5et3eBpe7Su4CFLjVxqeUvI.jpeg" alt="성공사례 2">
+    <div class="case-item">
+      <div class="case-img">
+        <img src="images/cL9K5et3eBpe7Su4CFLjVxqeUvI.jpeg" alt="성공사례 2">
+      </div>
+      <p class="case-caption">직장 내 성희롱 인정 결과문</p>
     </div>
-    <div class="case-img">
-      <img src="images/case-3.jpeg" alt="성공사례 3">
+    <div class="case-item">
+      <div class="case-img">
+        <img src="images/case-3.jpeg" alt="성공사례 3">
+      </div>
+      <p class="case-caption">임금명세서 미교부 인정 결과문</p>
     </div>
   </div>
 </section>
