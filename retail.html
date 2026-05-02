@@ -220,30 +220,37 @@ body {
 .package-card p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.8; word-break: keep-all; }
 .package-counter-reset { counter-reset: pkg; }
 
-/* CLASS 101 */
-.class101-section { padding: 110px 24px; background: linear-gradient(135deg, #f7f5f0 0%, #ece8df 100%); position: relative; overflow: hidden; }
-.class101-section::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(10,10,10,0.04) 0%, transparent 70%); pointer-events: none; }
-.class101-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; position: relative; }
-.class101-left .section-tag { color: #8a8478; }
-.class101-left .section-tag::after { background: #c9c3b5; }
-.class101-title { font-family: 'Figtree', sans-serif; font-size: 40px; font-weight: 800; color: #0a0a0a; margin-bottom: 20px; letter-spacing: -0.5px; line-height: 1.25; word-break: keep-all; }
-.class101-title .accent { color: #8a7a52; }
-.class101-desc { font-size: 16px; color: #5a5a5a; line-height: 1.9; margin-bottom: 28px; word-break: keep-all; }
-.class101-highlights { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
-.class101-highlights li { font-size: 15px; color: #3a3a3a; padding-left: 24px; position: relative; line-height: 1.7; word-break: keep-all; list-style: none; }
-.class101-highlights li::before { content: ''; position: absolute; left: 0; top: 10px; width: 14px; height: 2px; background: #0a0a0a; }
-.class101-cta { display: inline-flex; align-items: center; gap: 10px; padding: 17px 34px; background: #0a0a0a; color: #fff; border-radius: 16px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
-.class101-cta:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.25); }
-.class101-cta svg { width: 18px; height: 18px; }
-.class101-card { background: #fff; border-radius: 24px; padding: 40px 36px; box-shadow: 0 24px 70px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
-.class101-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, #0a0a0a, #8a7a52); }
-.class101-card-badge { display: inline-block; padding: 6px 12px; background: #f2efe7; color: #8a7a52; font-size: 11px; font-weight: 700; letter-spacing: 2px; border-radius: 6px; margin-bottom: 18px; }
-.class101-card h3 { font-family: 'Figtree', sans-serif; font-size: 24px; font-weight: 800; color: #0a0a0a; margin-bottom: 10px; letter-spacing: -0.3px; line-height: 1.35; }
-.class101-card .sub { font-size: 14px; color: #888; margin-bottom: 28px; line-height: 1.7; }
-.class101-meta { display: flex; flex-direction: column; gap: 14px; padding-top: 22px; border-top: 1px solid #eee; }
-.class101-meta-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-.class101-meta-row .label { color: #999; }
-.class101-meta-row .value { color: #0a0a0a; font-weight: 600; }
+/* ONLINE CLASSES */
+.classes-section { padding: 110px 24px; background: linear-gradient(135deg, #f7f5f0 0%, #ece8df 100%); position: relative; overflow: hidden; }
+.classes-section::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(10,10,10,0.04) 0%, transparent 70%); pointer-events: none; }
+.classes-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+.classes-header { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+.classes-header .section-tag { color: #8a8478; }
+.classes-header .section-tag::after { background: #c9c3b5; margin-left: auto; margin-right: auto; }
+.classes-title { font-family: 'Figtree', sans-serif; font-size: 40px; font-weight: 800; color: #0a0a0a; margin-bottom: 20px; letter-spacing: -0.5px; line-height: 1.25; word-break: keep-all; }
+.classes-title .accent { color: #8a7a52; }
+.classes-desc { font-size: 16px; color: #5a5a5a; line-height: 1.9; word-break: keep-all; }
+.classes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.class-card { background: #fff; border-radius: 24px; padding: 40px 36px; box-shadow: 0 24px 70px rgba(0,0,0,0.1); position: relative; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1); }
+.class-card:hover { transform: translateY(-6px); box-shadow: 0 32px 80px rgba(0,0,0,0.14); }
+.class-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; }
+.class-card.class101::before { background: linear-gradient(90deg, #0a0a0a, #8a7a52); }
+.class-card.inflearn::before { background: linear-gradient(90deg, #0a0a0a, #1abc9c); }
+.class-card-platform { display: inline-block; padding: 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: 2px; border-radius: 6px; margin-bottom: 18px; }
+.class-card-platform.class101 { background: #f2efe7; color: #8a7a52; }
+.class-card-platform.inflearn { background: #e7f6f2; color: #1abc9c; }
+.class-card h3 { font-family: 'Figtree', sans-serif; font-size: 24px; font-weight: 800; color: #0a0a0a; margin-bottom: 10px; letter-spacing: -0.3px; line-height: 1.35; }
+.class-card .sub { font-size: 14px; color: #888; margin-bottom: 24px; line-height: 1.7; word-break: keep-all; }
+.class-card-highlights { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.class-card-highlights li { font-size: 14px; color: #3a3a3a; padding-left: 20px; position: relative; line-height: 1.65; word-break: keep-all; list-style: none; }
+.class-card-highlights li::before { content: ''; position: absolute; left: 0; top: 9px; width: 12px; height: 2px; background: #0a0a0a; }
+.class-card-meta { display: flex; flex-direction: column; gap: 12px; padding: 18px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 28px; }
+.class-card-meta-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.class-card-meta-row .label { color: #999; }
+.class-card-meta-row .value { color: #0a0a0a; font-weight: 600; }
+.class-card-cta { margin-top: auto; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; background: #0a0a0a; color: #fff; border-radius: 14px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+.class-card-cta:hover { background: #1a1a1a; box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.class-card-cta svg { width: 16px; height: 16px; }
 
 /* FLOATING */
 .floating-btns { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 999; }
@@ -297,12 +304,12 @@ body {
   .faq-section { padding: 80px 20px; }
   .package-section { padding: 80px 20px; }
   .package-grid { grid-template-columns: 1fr; }
-  .class101-section { padding: 80px 20px; }
-  .class101-inner { grid-template-columns: 1fr; gap: 40px; }
-  .class101-title { font-size: 28px; }
-  .class101-card { padding: 32px 24px; }
-  .class101-card h3 { font-size: 20px; }
-  .class101-cta { width: 100%; max-width: 280px; justify-content: center; }
+  .classes-section { padding: 80px 20px; }
+  .classes-header { margin-bottom: 40px; }
+  .classes-title { font-size: 28px; }
+  .classes-grid { grid-template-columns: 1fr; gap: 18px; }
+  .class-card { padding: 32px 24px; }
+  .class-card h3 { font-size: 20px; }
   .floating-btns { bottom: 16px; right: 16px; }
   .floating-btn { width: 48px; height: 48px; border-radius: 14px; }
   .floating-btn svg { width: 22px; height: 22px; }
@@ -599,32 +606,53 @@ body {
   </div>
 </section>
 
-<!-- Class 101 강의 -->
-<section class="class101-section">
-  <div class="class101-inner reveal">
-    <div class="class101-left">
-      <div class="section-tag">Online Class</div>
-      <h2 class="class101-title">매출을 <span class="accent">숫자가 아닌 구조</span>로<br>바라보는 법</h2>
-      <p class="class101-desc">17개 강의로 정리한 리테일 현장의 운영 기준. 매출이 만들어지는 구조와 안정적으로 운영되는 매장의 공통 패턴을 배웁니다.</p>
-      <ul class="class101-highlights">
-        <li>매장을 운영하거나 관리하고 있는 리테일 종사자</li>
-        <li>매출이 만들어지는 구조를 이해하고 싶은 분</li>
-        <li>매장 운영을 체계적으로 바라보고 싶은 분</li>
-      </ul>
-      <a href="https://class101.net/ko/products/6986af6aeb6e502686c37453#curriculum" target="_blank" rel="noopener" class="class101-cta">
-        CLASS101에서 수강하기
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
+<!-- 온라인 강의 -->
+<section class="classes-section">
+  <div class="classes-inner reveal">
+    <div class="classes-header">
+      <div class="section-tag" style="text-align:center">Online Class</div>
+      <h2 class="classes-title">매출을 <span class="accent">숫자가 아닌 구조</span>로 바라보는 법</h2>
+      <p class="classes-desc">현장과 본사 양쪽에서 축적한 리테일 운영 기준을 두 개의 온라인 강의로 정리했습니다.</p>
     </div>
-    <div class="class101-card">
-      <span class="class101-card-badge">CLASS101</span>
-      <h3>유통 실무의 정석</h3>
-      <p class="sub">매출 흐름을 구조 관점에서 해석하는 리테일 실무 강의</p>
-      <div class="class101-meta">
-        <div class="class101-meta-row"><span class="label">구성</span><span class="value">총 17개 강의</span></div>
-        <div class="class101-meta-row"><span class="label">대상</span><span class="value">리테일·패션·유통 실무자</span></div>
-        <div class="class101-meta-row"><span class="label">방식</span><span class="value">온라인 VOD + 수업자료</span></div>
-      </div>
+    <div class="classes-grid">
+      <article class="class-card class101">
+        <span class="class-card-platform class101">CLASS101</span>
+        <h3>유통 실무의 정석</h3>
+        <p class="sub">매출 흐름을 구조 관점에서 해석하는 리테일 실무 강의</p>
+        <ul class="class-card-highlights">
+          <li>매장을 운영·관리하는 리테일 종사자</li>
+          <li>매출이 만들어지는 구조를 이해하고 싶은 분</li>
+          <li>매장 운영을 체계적으로 바라보고 싶은 분</li>
+        </ul>
+        <div class="class-card-meta">
+          <div class="class-card-meta-row"><span class="label">구성</span><span class="value">총 17개 강의</span></div>
+          <div class="class-card-meta-row"><span class="label">대상</span><span class="value">리테일·패션·유통 실무자</span></div>
+          <div class="class-card-meta-row"><span class="label">방식</span><span class="value">온라인 VOD + 수업자료</span></div>
+        </div>
+        <a href="https://class101.net/ko/products/6986af6aeb6e502686c37453#curriculum" target="_blank" rel="noopener" class="class-card-cta">
+          CLASS101에서 수강하기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <article class="class-card inflearn">
+        <span class="class-card-platform inflearn">INFLEARN</span>
+        <h3>리테일 실무의 정석</h3>
+        <p class="sub">KPI·조직 충돌·본사–현장 간극을 설계 관점에서 해석하는 강의</p>
+        <ul class="class-card-highlights">
+          <li>실적은 받지만 KPI 해석이 명확하지 않은 현장 관리자</li>
+          <li>본사 지침과 현장 실행 사이에서 혼선을 겪는 중간 관리자</li>
+          <li>매출·운영을 구조적으로 설명해야 하는 취업준비생</li>
+        </ul>
+        <div class="class-card-meta">
+          <div class="class-card-meta-row"><span class="label">구성</span><span class="value">총 9강 · 2시간 59분</span></div>
+          <div class="class-card-meta-row"><span class="label">난이도</span><span class="value">입문 ~ 초급</span></div>
+          <div class="class-card-meta-row"><span class="label">수강료</span><span class="value">무료</span></div>
+        </div>
+        <a href="https://www.inflearn.com/course/the-fundamentals-of-1?inst=8f455bf7&utm_campaign=inflearn_%ED%8A%B8%EB%9E%98%ED%94%BD_promotion-link&utm_medium=referral&utm_source=instructor&utm_user=1756430&cid=342001" target="_blank" rel="noopener" class="class-card-cta">
+          인프런에서 수강하기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
     </div>
   </div>
 </section>
